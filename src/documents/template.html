@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-100">
+  <head>
+    <meta charset="UTF-8" />
+    <title>TodoApp Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- CDN Tailwind pour preview (remplacé par Vite/Tailwind dans l'app) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body
+    class="min-h-full flex flex-col items-center bg-slate-600 text-slate-100"
+  >
+    <!-- HEADER -->
+    <header class="pt-12 text-center w-full max-w-xl px-4">
+      <h1 class="text-4xl font-bold text-slate-400 tracking-tight">TodoApp</h1>
+      <p class="text-slate-400 mt-2">A clean & simple template.</p>
+    </header>
+
+    <!-- MAIN -->
+    <main class="w-full max-w-xl mt-8 bg-slate-200 rounded-xl">
+      <!-- CARD LISTE -->
+      <section
+        class="bg-slate-100 rounded-xl shadow ring-1 ring-slate-200/60 overflow-hidden"
+        aria-labelledby="todo-heading"
+      >
+        <h2 id="todo-heading" class="sr-only">Todo list</h2>
+
+        <!-- INPUT PRINCIPAL -->
+        <div class="border-b border-slate-200 bg-slate-50 py-3 px-4 sm:p-5">
+          <form class="flex gap-2" aria-label="Add a new task">
+            <label for="new-todo" class="sr-only">New task</label>
+            <input
+              id="new-todo"
+              type="text"
+              placeholder="What needs to be done?"
+              class="w-full bg-slate-100 border border-slate-300 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              type="submit"
+              class="shrink-0 px-4 py-3 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            >
+              Add
+            </button>
+          </form>
+        </div>
+
+        <!-- LISTE DES TODOS -->
+        <ul
+          class="m-4 divide-y divide-slate-200"
+          role="list"
+          aria-label="Todos"
+        >
+          <!-- ITEM (exemple) -->
+          <li class="px-4 py-3 sm:px-5" role="listitem">
+            <div class="flex items-center gap-3">
+              <!-- La ligne entière est cliquable via label -->
+              <input
+                id="t1"
+                type="checkbox"
+                class="h-4 w-4 text-blue-600 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+              />
+              <label for="t1" class="flex-1 text-slate-800 cursor-pointer">
+                Buy milk
+              </label>
+              <button
+                class="text-red-600/90 hover:text-red-700 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded"
+                aria-label="Delete task"
+                title="Delete"
+              >
+                ✕
+              </button>
+            </div>
+            <!-- Champ d'édition (masqué par défaut, visible en mode edit) -->
+            <input
+              type="text"
+              value="Buy milk"
+              class="hidden mt-2 w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </li>
+
+          <li class="px-4 py-3 sm:px-5" role="listitem">
+            <div class="flex items-center gap-3">
+              <input
+                id="t2"
+                type="checkbox"
+                checked
+                class="h-4 w-4 text-blue-600 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+              />
+              <label
+                for="t2"
+                class="flex-1 line-through text-slate-400 cursor-pointer"
+              >
+                Finish homework
+              </label>
+              <button
+                class="text-red-600/90 hover:text-red-700 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded"
+                aria-label="Delete task"
+                title="Delete"
+              >
+                ✕
+              </button>
+            </div>
+            <input
+              type="text"
+              value="Finish homework"
+              class="hidden mt-2 w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </li>
+
+          <li class="px-4 py-3 sm:px-5" role="listitem">
+            <!-- Mode édition (exemple) -->
+            <div class="hidden items-center gap-3">
+              <input
+                id="t3"
+                type="checkbox"
+                checked
+                class="h-4 w-4 text-blue-600 cursor-pointer"
+              />
+              <label
+                for="t3"
+                class="flex-1 line-through text-slate-400 cursor-pointer"
+              >
+                Edited homework
+              </label>
+              <button
+                class="text-red-600/90 hover:text-red-700 text-sm transition-colors"
+                aria-label="Delete task"
+              >
+                ✕
+              </button>
+            </div>
+            <input
+              type="text"
+              value="Edited homework"
+              class="mt-0 w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </li>
+
+          <!-- Message si aucun todo (à gérer en Vue) -->
+          <li
+            class="px-4 py-6 sm:px-5 text-slate-400 italic text-center hidden"
+            role="listitem"
+          >
+            No tasks yet.
+          </li>
+        </ul>
+
+        <!-- FOOTER DE LISTE -->
+        <div
+          class="border-t border-slate-300 bg-slate-300 px-4 py-3 sm:px-5 text-slate-600"
+          role="contentinfo"
+          aria-label="Todo list footer"
+        >
+          <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+            <!-- Compteur avec aria-live -->
+            <p class="text-sm">
+              <span
+                id="items-left"
+                class="font-medium"
+                aria-live="polite"
+                aria-atomic="true"
+                >2</span
+              >
+              items left
+            </p>
+
+            <!-- Filtres -->
+            <nav class="flex items-center gap-2" aria-label="Filters">
+              <button
+                class="px-3 py-1.5 text-sm rounded-full border border-slate-300 hover:border-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                aria-pressed="true"
+              >
+                All
+              </button>
+              <button
+                class="px-3 py-1.5 text-sm rounded-full border border-slate-300 hover:border-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                aria-pressed="false"
+              >
+                Active
+              </button>
+              <button
+                class="px-3 py-1.5 text-sm rounded-full border border-slate-300 hover:border-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                aria-pressed="false"
+              >
+                Completed
+              </button>
+            </nav>
+
+            <!-- Action secondaire -->
+            <div class="sm:ml-auto">
+              <button
+                class="text-sm text-slate-600 hover:text-slate-800 underline underline-offset-2 decoration-slate-300 hover:decoration-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
+              >
+                Clear completed
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER GLOBAL -->
+    <footer class="my-6 text-slate-400 text-sm text-center">
+      <p>Simple Todo Template — Tailwind CSS · EAFC 2025</p>
+    </footer>
+  </body>
+</html>
