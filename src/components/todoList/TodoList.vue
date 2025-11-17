@@ -1,8 +1,15 @@
 <script setup>
+import {reactive, onMounted} from "vue";
+import DB from "@/services/DB";
 import TodoListAddForm from './TodoListAddForm.vue';
 import Todo from './Todo.vue';
 import TodoListFooter from './TodoListFooter.vue';
 
+const todos = reactive([]);
+onMounted( async()=>{
+  DB.setApiUrl("https://691b19752d8d785575717f93.mockapi.io/");
+  todos.splice(todos.length, 0,...(await DB.findAll()));
+})
 
 </script>
 
@@ -20,12 +27,12 @@ import TodoListFooter from './TodoListFooter.vue';
 
         <!-- LISTE DES TODOS -->
         <ul
-          class="m-4 divide-y divide-slate-200"
+          class="m-4 divide-y divide-slate-200 text-slate-600"
           role="list"
           aria-label="Todos"
         >
           <!-- ITEM (exemple) -->
-          <todo/>
+          <todo v-for="todo in todos" :key="todo.id" :todo="todo"/>
         </ul>
 
         <!-- FOOTER DE LISTE -->

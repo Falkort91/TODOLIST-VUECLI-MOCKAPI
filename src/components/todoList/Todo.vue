@@ -1,4 +1,7 @@
 <script setup>
+const props = defineProps({
+     todo:{type:Object, required:true},
+})
 
 </script>
 
@@ -10,10 +13,11 @@
               <input
                 id="t1"
                 type="checkbox"
+                v-model="todo.isCompleted"
                 class="h-4 w-4 text-blue-600 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
               />
-              <label for="t1" class="flex-1 text-slate-800 cursor-pointer">
-                Buy milk
+              <label for="t1" class="flex-1 cursor-pointer" :class="{'line-through text-slate-400':todo.isCompleted}">
+                {{ todo.content }}
               </label>
               <button
                 class="text-red-600/90 hover:text-red-700 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded"
