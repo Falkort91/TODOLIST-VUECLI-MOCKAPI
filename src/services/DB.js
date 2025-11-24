@@ -13,8 +13,8 @@ export default class DB {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        content: data.content,
-        isCompleted: data.isCompleted,
+        content: data,
+        isCompleted: false,
       }),
     });
     return response.json();

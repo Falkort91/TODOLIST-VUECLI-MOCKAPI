@@ -16,6 +16,18 @@ onMounted( async()=>{
   todos.splice(todos.length, 0,...(await DB.findAll()));
 })
 
+//FONCTION CRUD
+
+const createItem = async (content)=>{
+  console.log(content);
+  
+    // 1. Lancer DB.create qui retourne la todo avec son id
+    const todo = await DB.create(content);
+    // 2. Ajouter dans les todos
+    todos.push(todo);
+  }
+
+  
 </script>
 
 <template>
@@ -28,7 +40,7 @@ onMounted( async()=>{
         <h2 id="todo-heading" class="sr-only">Todo list</h2>
 
         <!-- INPUT PRINCIPAL -->
-        <TodoListAddForm/>
+        <TodoListAddForm @on-submit-add-form="createItem($event)"/>
 
         <!-- LISTE DES TODOS -->
         <ul
