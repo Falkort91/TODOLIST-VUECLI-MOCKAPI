@@ -19,14 +19,17 @@ onMounted( async()=>{
 //FONCTION CRUD
 
 const createItem = async (content)=>{
-  console.log(content);
-  
     // 1. Lancer DB.create qui retourne la todo avec son id
     const todo = await DB.create(content);
     // 2. Ajouter dans les todos
     todos.push(todo);
   }
 
+  const deleteOneById = async(id)=>{
+    await DB.deleteOneById(id);
+    todos.splice(todos.findIndex((todo)=> todo.id === id),1
+    );
+  };
   
 </script>
 
@@ -49,7 +52,7 @@ const createItem = async (content)=>{
           aria-label="Todos"
         >
           <!-- ITEM (exemple) -->
-          <todo v-for="todo in todos" :key="todo.id" :todo="todo"/>
+          <todo v-for="todo in todos" :key="todo.id" :todo="todo" @on-delete="deleteOneById($event)"/>
         </ul>
 
         <!-- FOOTER DE LISTE -->
