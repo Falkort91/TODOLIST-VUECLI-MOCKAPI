@@ -5,9 +5,14 @@ import TodoListAddForm from './TodoListAddForm.vue';
 import Todo from './Todo.vue';
 import TodoListFooter from './TodoListFooter.vue';
 
+const props = defineProps({
+  apiURL:{type: String, required:true}
+})
+
 const todos = reactive([]);
+
 onMounted( async()=>{
-  DB.setApiUrl("https://691b19752d8d785575717f93.mockapi.io/");
+  DB.setApiUrl(props.apiURL);
   todos.splice(todos.length, 0,...(await DB.findAll()));
 })
 
