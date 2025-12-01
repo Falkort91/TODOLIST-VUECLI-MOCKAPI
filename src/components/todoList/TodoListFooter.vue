@@ -1,4 +1,7 @@
 <script setup>
+const props = defineProps({
+  notCompletedCount:{type: Number, required:true}
+})
 
 </script>
 
@@ -17,9 +20,9 @@
                 class="font-medium"
                 aria-live="polite"
                 aria-atomic="true"
-                >2</span
-              >
-              items left
+                >{{ notCompletedCount }}
+              </span>
+              item(s) left
             </p>
 
             <!-- Filtres -->

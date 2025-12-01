@@ -1,5 +1,5 @@
 <script setup>
-import {reactive, onMounted} from "vue";
+import {reactive, onMounted, computed} from "vue";
 import DB from "@/services/DB";
 import TodoListAddForm from './TodoListAddForm.vue';
 import Todo from './Todo.vue';
@@ -15,6 +15,8 @@ onMounted( async()=>{
   DB.setApiUrl(props.apiURL);
   todos.splice(todos.length, 0,...(await DB.findAll()));
 })
+
+const notCompletedCount = computed(()=>todos.filter((todo) => !todo.isCompleted).length)
 
 //FONCTION CRUD
 
@@ -52,11 +54,11 @@ const createItem = async (content)=>{
           aria-label="Todos"
         >
           <!-- ITEM (exemple) -->
-          <todo v-for="todo in todos" :key="todo.id" :todo="todo" @on-delete="deleteOneById($event)"/>
+          <todo v-for="todo in todos" :key="todo.id" :todo="todo" @on-delete="deleteOneById($event)" />
         </ul>
 
         <!-- FOOTER DE LISTE -->
-        <TodoListFooter/>
+        <TodoListFooter :notCompletedCount="notCompletedCount"/>
       </section>
 
 </template>
