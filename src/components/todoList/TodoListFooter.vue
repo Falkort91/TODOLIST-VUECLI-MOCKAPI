@@ -1,11 +1,11 @@
 <script setup>
 const props = defineProps({
-  notCompletedCount:{type: Number, required:true}
+  notCompletedCount:{type:Number, required:true}
 })
 
 </script>
 
-<template>
+<template>         
 
     <div
           class="border-t border-slate-300 bg-slate-300 px-4 py-3 sm:px-5 text-slate-600"
@@ -19,8 +19,8 @@ const props = defineProps({
                 id="items-left"
                 class="font-medium"
                 aria-live="polite"
-                aria-atomic="true"
-                >{{ notCompletedCount }}
+                aria-atomic="true">
+                {{ notCompletedCount }}
               </span>
               item(s) left
             </p>
@@ -29,20 +29,17 @@ const props = defineProps({
             <nav class="flex items-center gap-2" aria-label="Filters">
               <button
                 class="px-3 py-1.5 text-sm rounded-full border border-slate-300 hover:border-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-                aria-pressed="true"
-              >
+                aria-pressed="true">
                 All
               </button>
               <button
                 class="px-3 py-1.5 text-sm rounded-full border border-slate-300 hover:border-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-                aria-pressed="false"
-              >
+                aria-pressed="false">
                 Active
               </button>
               <button
                 class="px-3 py-1.5 text-sm rounded-full border border-slate-300 hover:border-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-                aria-pressed="false"
-              >
+                aria-pressed="false">
                 Completed
               </button>
             </nav>
@@ -50,8 +47,7 @@ const props = defineProps({
             <!-- Action secondaire -->
             <div class="sm:ml-auto">
               <button
-                class="text-sm text-slate-600 hover:text-slate-800 underline underline-offset-2 decoration-slate-300 hover:decoration-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
-              >
+                class="text-sm text-slate-600 hover:text-slate-800 underline underline-offset-2 decoration-slate-300 hover:decoration-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
                 Clear completed
               </button>
             </div>
